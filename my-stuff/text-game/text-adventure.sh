@@ -34,10 +34,10 @@ function choose_house_or_cave () {
   echo_pause "(Please enter 1 or 2.)"
   read choice  
 
-  if [[ $choice == 1 ]] 
-    then knock_door 
-  elif [[ $choice == 2 ]]
-    then choose_cave 
+  if [[ $choice == 1 ]]; then 
+    knock_door 
+  elif [[ $choice == 2 ]]; then
+    choose_cave 
   else 
     echo_pause "That\'s not an option."
     choose_house_or_cave 
@@ -49,18 +49,17 @@ function knock_door () {
   echo_pause "You are about to enter and out steps the $villain."
   echo_pause "Eep! This is the $villain's house!"
   echo_pause "The $villain attacks you!"
-  if [[ $ARMED_WITH != $mighty_weapon ]]
-    then echo_pause "You feel a little under-prepared, what with only having a $wimpy_weapon."
+  if [[ $ARMED_WITH != $mighty_weapon ]]; then
+    echo_pause "You feel a little under-prepared, what with only having a $wimpy_weapon."
   fi
   echo_pause "Would you like to (1) fight or (2) run away?"
   read choice
-  if [[ $choice == 1 ]]
-    then choose_to_fight
-  elif [[ $choice == 2 ]]
-    then 
-      echo_pause "You run back into the field."
-      echo_pause "Luckily, you don't seem to have been followed.\n"
-      choose_house_or_cave
+  if [[ $choice == 1 ]]; then
+    choose_to_fight
+  elif [[ $choice == 2 ]]; then 
+    echo_pause "You run back into the field."
+    echo_pause "Luckily, you don't seem to have been followed.\n"
+    choose_house_or_cave
   else 
     echo_pause "That's not an option."
     choose_house_or_cave
@@ -68,8 +67,7 @@ function knock_door () {
 }
 
 function choose_cave () {
-  if [[ $ARMED_WITH == $mighty_weapon ]]
-  then 
+  if [[ $ARMED_WITH == $mighty_weapon ]]; then 
     echo_pause "You've been here before, and gotten all the good stuff. It's just an empty cave now. You walk back out to the field.\n"
     choose_house_or_cave
   else  
@@ -111,13 +109,11 @@ function you_lose (){
 function want_to_play_again(){
   echo_pause "Would you like to play again? y/n"
   read choice
-  if [[ $choice == y ]] 
-    then 
-      echo_pause "Excellent! Restarting the game..."
-      play_game
-  elif [[ $choice == n ]]
-    then 
-      echo_pause "Thank you for playing! See you next time."
+  if [[ $choice == y ]]; then  
+    echo_pause "Excellent! Restarting the game..."
+    play_game
+  elif [[ $choice == n ]]; then
+    echo_pause "Thank you for playing! See you next time."
   else 
     echo_pause "That's not an option."
     want_to_play_again
