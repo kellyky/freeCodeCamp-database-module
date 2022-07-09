@@ -1,17 +1,26 @@
 #!/bin/bash
 
 # Translating my python text adventure game to shell :D 
-# to-do:
-  # add logcic to play slightly different weapong/victory sequence depending on the weapon - maybe
-  # replace MIGHTY ARMORY contents with better weapon names
+  
+function SET_WEAPONS_AND_VILLAINS () {
+  # Possible TODO:
+  # Swap the numbers with the array length - for easier adding/removing list items..
+  # Another possibily - promt user for the villians/weapons and use those
+  DINKY_WEAPONS=("fountain pen" "dagger" "umbrella" "paintbrush" "magnifying glass")
+  WIMPY_WEAPON=${DINKY_WEAPONS[$(( RANDOM % 5 ))]}
 
-CADRE_OF_VILLAINS=("tax collector" "evil oceanographer" "inept but evil pirate" "baby shark")
-DINKY_WEAPONS=("fountain pen" "dagger" "umbrella" "paintbrush" "magnifying glass")
-MIGHTY_ARMORY=("magical Sword of Ogoroth" "mystical WEAPON 2 - TBD" "miraculous WEAPON 3 - TBD" "pugnacious Pug from Pugnasia")
+  MIGHTY_ARMORY=("magical Sword of Ogoroth" "mystical Mirror of Memory" "pugnacious Pug from Pugnasia")
+  MIGHTY_WEAPON=${MIGHTY_ARMORY[$(( RANDOM % 3 ))]}
+
+  CADRE_OF_VILLAINS=("tax collector" "evil oceanographer" "inept but evil pirate" "baby shark")
+  VILLAIN=${CADRE_OF_VILLAINS[$(( RANDOM % 4 ))]}
+
+  ARMED_WITH=$WIMPY_WEAPON
+}
 
 function ECHO_PAUSE (){
   echo -e "$1"
-  sleep 0.5
+  sleep 0.75
 }
 
 function INTRO (){
@@ -70,7 +79,7 @@ function CHOOSE_CAVE () {
     ECHO_PAUSE "It turns out to be a very small cave."
     ECHO_PAUSE "Your eye catches a glint of metal behind a rock."
     ECHO_PAUSE "You have found the $MIGHTY_WEAPON!"
-    ARMED_WITH+=$MIGHTY_WEAPON
+    ARMED_WITH=$MIGHTY_WEAPON
     ECHO_PAUSE "You discard your silly $WIMPY_WEAPON and take the sword with you."
     ECHO_PAUSE "You walk back out to the field.\n"
     CHOOSE_HOUSE_OR_CAVE
@@ -78,6 +87,8 @@ function CHOOSE_CAVE () {
 }
 
 function CHOOSE_FIGHT (){ 
+  # TODOs
+    # Possibly create slightly different victory sequences depending on the weapon. 
   if [[ $ARMED_WITH == $MIGHTY_WEAPON ]]
     then
       ECHO_PAUSE "As the $VILLAIN moves to attach, you ready your new weapon." 
@@ -94,32 +105,23 @@ function CHOOSE_FIGHT (){
 }
 
 function WANT_TO_PLAY_AGAIN(){
-  echo Would you like to play again? y/n
+  ECHO_PAUSE "Would you like to play again? y/n"
   read CHOICE
-  sleep 0.5
   if [[ $CHOICE == y ]] 
-    then echo Excellent! Restarting the game...
-    sleep 0.5
-    PLAY_GAME
+    then 
+      ECHO_PAUSE "Excellent! Restarting the game..."
+      PLAY_GAME
   elif [[ $CHOICE == n ]]
-    then echo "Thank you for playing! See you next time."
-    sleep 0.5
+    then 
+      ECHO_PAUSE "Thank you for playing! See you next time."
   else 
-    echo "That's not an option."
-    sleep 0.5
+    ECHO_PAUSE "That's not an option."
     WANT_TO_PLAY_AGAIN
   fi
-
 }
 
 function PLAY_GAME () {
-  # Setting our variables: wimpy weapon, mighy weapon, villain
-  WIMPY_WEAPON=${DINKY_WEAPONS[$(( RANDOM % 5 ))]}
-  MIGHTY_WEAPON=${MIGHTY_ARMORY[$(( RANDOM % 4 ))]}
-  VILLAIN=${CADRE_OF_VILLAINS[$(( RANDOM % 4 ))]}
-  ARMED_WITH=""
-  
-  # play the game
+  SET_WEAPONS_AND_VILLAINS
   INTRO
   CHOOSE_HOUSE_OR_CAVE
 }
