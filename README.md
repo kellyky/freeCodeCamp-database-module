@@ -6,4 +6,4 @@ I'm really enjoying the bash exercises - examples are bingo.sh, countdown.sh, fo
 
 **To Play**: from that same directory run it: `./text-adventure.sh`, follow the prompts, and make your decisions. Enjoy! 
 
-Setup and play are the same for the other .sh files in here. but they're not really games. 🤔
+Setup and play is the same for the .sh files in `tutorial-stuff`. but they're not really games. 🤔
