@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Translating my python text adventure game to shell :D 
-# to-do:
-  # add logcic to play slightly different weapong/victory sequence depending on the weapon - maybe
-  # decide whether to replace the numbers in SET_WEAPONS_AND_VILLAINS with an array length method so we can add/remove weapons/villains more easily
-
+  
 function SET_WEAPONS_AND_VILLAINS () {
+  # Possible TODO:
+  # Swap the numbers with the array length - for easier adding/removing list items..
+  # Another possibily - promt user for the villians/weapons and use those
   DINKY_WEAPONS=("fountain pen" "dagger" "umbrella" "paintbrush" "magnifying glass")
   WIMPY_WEAPON=${DINKY_WEAPONS[$(( RANDOM % 5 ))]}
 
@@ -87,6 +87,8 @@ function CHOOSE_CAVE () {
 }
 
 function CHOOSE_FIGHT (){ 
+  # TODOs
+    # Possibly create slightly different victory sequences depending on the weapon. 
   if [[ $ARMED_WITH == $MIGHTY_WEAPON ]]
     then
       ECHO_PAUSE "As the $VILLAIN moves to attach, you ready your new weapon." 
@@ -110,7 +112,8 @@ function WANT_TO_PLAY_AGAIN(){
       ECHO_PAUSE "Excellent! Restarting the game..."
       PLAY_GAME
   elif [[ $CHOICE == n ]]
-    then ECHO_PAUSE "Thank you for playing! See you next time."
+    then 
+      ECHO_PAUSE "Thank you for playing! See you next time."
   else 
     ECHO_PAUSE "That's not an option."
     WANT_TO_PLAY_AGAIN
